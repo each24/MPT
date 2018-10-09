@@ -9,6 +9,5 @@
 
 // Заголовки CppUnitTest
 #include "CppUnitTest.h"
-#include "../Lab1/Drobi.h"
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
