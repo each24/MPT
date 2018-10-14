@@ -1,9 +1,10 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include <iostream>
 #include <string>
 #include <cmath>
 
-#define Pi 3.141592653589793238462643383279
+
 
 using namespace std;
 
