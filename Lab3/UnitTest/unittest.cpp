@@ -175,19 +175,19 @@ namespace UnitTest1
 		}
 		TEST_METHOD(TestMethod16)
 		{
-			string str = "-1 0 1 0 ";
+			string str = "-1010.000";
 			TPNumber A("-10", "2", "3");
 			Assert::AreEqual(A.strN(), str);
 		}
 		TEST_METHOD(TestMethod17)
 		{
-			string str = "1 0 1 0 ";
+			string str = "1010.000";
 			TPNumber A("10", "2", "3");
 			Assert::AreEqual(A.strN(), str);
 		}
 		TEST_METHOD(TestMethod18)
 		{
-			string str = "-A ";
+			string str = "-A.000";
 			TPNumber A("-10", "16", "3");
 			Assert::AreEqual(A.strN(), str);
 		}
@@ -198,6 +198,19 @@ namespace UnitTest1
 			Assert::AreEqual(A.getA(), 100.0);
 			Assert::AreEqual(A.getB(), A.getB());
 			Assert::AreEqual(A.getC(), A.getC());
+		}
+		TEST_METHOD(TestMethod20)
+		{
+			TPNumber A("5.5", "2", "3");
+			A = A.squer();
+			A.setB(10);
+			Assert::AreEqual(string("30.25"), A.strN());
+		}
+		TEST_METHOD(TestMethod21)
+		{
+			TPNumber A("10.0001", "2", "3");
+			
+			Assert::AreEqual(A.strN(), string("1010.000"));
 		}
 	};
 }

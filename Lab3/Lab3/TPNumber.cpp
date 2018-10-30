@@ -67,9 +67,9 @@ TPNumber TPNumber::multiplie(const TPNumber other) {
 		throw exception("not addable");
 }
 TPNumber TPNumber::obratnoe(){
-	TPNumber c = *this;
-	TPNumber a(1.0/c.a,c.b,c.c);
-	return a;
+	TPNumber A = *this;
+	TPNumber b(1.0 / A.a, A.b, A.c);
+	return b;
 }
 string TPNumber::strN(){
 	string NUM;
@@ -85,10 +85,13 @@ string TPNumber::strN(){
 			if (out[i] > 9) {
 				char temp = 'A' + out[i] - 10;
 				NUM += temp;
-				NUM += ' ';
 			}
 			else
-				NUM += to_string(out[i]) + ' ';
+				NUM += to_string(out[i]);
+		}
+		NUM += ".";
+		for (int i = 0; i < c; ++i) {
+			NUM += "0";
 		}
 	}
 	else {
@@ -99,7 +102,7 @@ string TPNumber::strN(){
 			t /= b;
 		}
 		for (int i = out.size(); i > 0; i--) {
-			NUM += to_string(out[i - 1]) + ' ';
+			NUM += to_string(out[i - 1]);
 		}
 		double z = A - int(A);
 		out.clear();
@@ -107,20 +110,20 @@ string TPNumber::strN(){
 		for (int i = 0; i < c; ++i) {
 			x /= (double)b;
 			t = 0;
-			while (A - x >= 0.0) {
-				A -= x;
+			while (z - x >= 0.0) {
+				z -= x;
 				t++;
 			}
 			out.push_back(t);
 		}
-		NUM += " . ";
-		for (int i = 0; i > int(out.size()) - 1; i++) {
+		NUM += ".";
+		for (int i = 0; i < int(out.size()); i++) {
 			if (out[i] > 9) {
 				char temp = out[i] - 10 + 'A';
-				NUM += temp + ' ';
+				NUM += temp;
 			}
 			else
-				NUM += to_string(out[i]) + ' ';
+				NUM += to_string(out[i]);
 		}
 	}
 	if((*this).a < 0)
