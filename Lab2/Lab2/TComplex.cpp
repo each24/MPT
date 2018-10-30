@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 float step(float a, int n) {
 	float c = 1.0;
 	for (int i = 0; i < n; i++) {
@@ -63,7 +64,7 @@ string TComplex::str() {
 	return this->strReal() + " + i * " + this->strMnim();
 }
 float TComplex::ugolG() {
-	return 180 / Pi * (*this).ugolR();
+	return 180 / M_PI * (*this).ugolR();
 }
 
 TComplex TComplex::minus() {
@@ -84,7 +85,7 @@ TComplex TComplex::Squer(int n, int k) {
 		TComplex a = *this;
 		float r = sqrtf(a.deist * a.deist + a.mnim * a.mnim);
 		r = powf(r, float(1 / n));
-		TComplex c(r * cos(a.ugolR() + 2 * Pi*k / n), sin(a.ugolR() + 2 * k*Pi / n));
+		TComplex c(r * cos(a.ugolR() + 2 * M_PI*k / n), sin(a.ugolR() + 2 * k*M_PI / n));
 		return c;
 	}
 	else {
@@ -103,16 +104,16 @@ float TComplex::ugolR() {
 	if (a.deist >= 0)
 		if (a.deist == 0)
 			if (a.mnim < 0)
-				return Pi / 2;
+				return M_PI / 2;
 			else
 				if (a.mnim == 0)
 					return 0;
 				else
-					return -Pi / 2;
+					return -M_PI / 2;
 		else 
 			return float(atan(a.mnim / a.deist));
 	else 
-		return float(atan(a.mnim / a.deist) + Pi);
+		return float(atan(a.mnim / a.deist) + M_PI);
 }
 bool TComplex::more(TComplex other) {
 	TComplex b = *this;

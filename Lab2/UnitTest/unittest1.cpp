@@ -1,7 +1,8 @@
+#define _USE_MATH_DEFINES
 #include "stdafx.h"
+#include <cmath>
 #include "CppUnitTest.h"
 #include "../Lab2/TComplex.h"
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest1
@@ -106,7 +107,7 @@ namespace UnitTest1
 			// TODO: Разместите здесь код своего теста
 			TComplex a(1.0, 1.0);
 			float b = a.ugolR();
-			Assert::AreEqual(b, float(Pi/4));
+			Assert::AreEqual(b, float(M_PI/4));
 		}
 		TEST_METHOD(TestMethod15)
 		{
