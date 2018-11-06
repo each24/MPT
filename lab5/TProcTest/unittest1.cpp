@@ -21,8 +21,16 @@ namespace TProcTest
 			Assert::IsTrue(rget == int());
 			Assert::IsTrue(operation == None);
 		}
-
-
+		TEST_METHOD(ConstructorAndGetters2)
+		{
+			TProc<int> test = TProc<int>(1,2);
+			int lrget = test.Lop_Res_Get();
+			int rget = test.Rop_Get();
+			TOprtn operation = test.OprtnGet();
+			Assert::AreEqual(lrget, 1);
+			Assert::AreEqual(rget, 2);
+			Assert::IsTrue(operation == None);
+		}
 		TEST_METHOD(Setters)
 		{
 			TProc<int> test = TProc<int>();
@@ -34,8 +42,6 @@ namespace TProcTest
 			Assert::IsTrue(test.Rop_Get() == test2);
 			Assert::IsTrue(test.OprtnGet() == Add);
 		}
-
-
 		TEST_METHOD(Reset)
 		{
 			TProc<int> test = TProc<int>();
@@ -47,8 +53,6 @@ namespace TProcTest
 			Assert::IsTrue(test.Rop_Get() == int());
 			Assert::IsTrue(test.OprtnGet() == None);
 		}
-
-
 		TEST_METHOD(OprtnClear)
 		{
 			TProc<int> test = TProc<int>();
@@ -56,8 +60,6 @@ namespace TProcTest
 			test.OprtnClear();
 			Assert::IsTrue(test.OprtnGet() == None);
 		}
-
-
 		TEST_METHOD(OprtnRun)
 		{
 			TProc<int> test = TProc<int>();
@@ -69,24 +71,21 @@ namespace TProcTest
 			Assert::IsTrue(test.Rop_Get() == int(4));
 			Assert::IsTrue(test.OprtnGet() == Mul);
 		}
-
-
-
 		TEST_METHOD(TestRun)
 		{
 			TProc<int> test = TProc<int>();
 
-			test.Lop_Res_Set(int(5));
-			test.OprtnSet(Add);
-			Assert::IsTrue(test.Lop_Res_Get() == int(5));
+			test.Lop_Res_Set(int(-10));
+			test.OprtnSet(Sub);
+			Assert::AreEqual(test.Lop_Res_Get(), -10);
 			Assert::IsTrue(test.Rop_Get() == int());
-			Assert::IsTrue(test.OprtnGet() == Add);
+			Assert::IsTrue(test.OprtnGet() == Sub);
 
 			test.Rop_Set(int(3));
 			test.OprtnRun();
 			test.OprtnSet(Mul);
-			Assert::IsTrue(test.Lop_Res_Get() == 8);
-			Assert::IsTrue(test.Rop_Get() == int(3));
+			Assert::AreEqual(test.Lop_Res_Get(), -13);
+			Assert::AreEqual(test.Rop_Get(), 3);
 			Assert::IsTrue(test.OprtnGet() == Mul);
 
 

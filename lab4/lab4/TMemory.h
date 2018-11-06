@@ -10,19 +10,19 @@ public:
 	TMemory() : fNumber(T()), fState(false) {};
 	~TMemory() {};
 
-	void write(const T & e) {
+	void write(const T e) {
 		fNumber = e;
 		fState = true;
 	};
 	T get() {
 		fState = true;
-		T ret = fNumber;
-		return ret;
+		T A = fNumber;
+		return A;
 	};
 	bool getState() {
 		return fState;
 	};
-	void add(const T & e) {
+	void add(const T e) {
 		fNumber = fNumber + e;
 		fState = true;
 	};
@@ -31,7 +31,10 @@ public:
 		fState = false;
 	};
 	std::string readMemoryState() {
-		return fState ? std::string("_On") : std::string("_Off");
+		if (fState)
+			return std::string("_On");
+		else
+			return std::string("_Off");
 	};
 	T getFNumber() {
 		return fNumber;

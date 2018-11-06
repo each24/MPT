@@ -25,27 +25,24 @@ public:
 	{
 		Operation = None;
 	}
-
-
+	TProc(T lop_res, T rop) : Lop_Res(T(lop_res)), Rop(T(rop))
+	{
+		Operation = None;
+	}
 	~TProc()
 	{
 
 	}
-
-
 	void ReSet()
 	{
 		Lop_Res = T();
 		Rop = T();
 		Operation = None;
 	}
-
 	void OprtnClear()
 	{
 		Operation = None;
 	}
-
-
 	void OprtnRun()
 	{
 		switch (Operation)
@@ -66,8 +63,6 @@ public:
 			break;
 		}
 	}
-
-
 	void FuncRun(enum TFunc func)
 	{
 		switch (func) {
@@ -81,43 +76,29 @@ public:
 			break;
 		}
 	}
-
-
 	T Lop_Res_Get() const
 	{
 		return Lop_Res;
 	}
-
-
-	void Lop_Res_Set(const T & set)
+	void Lop_Res_Set(const T set)
 	{
 		Lop_Res = set;
 	}
-
-
-	void Rop_Set(const T & set)
+	void Rop_Set(const T set)
 	{
 		Rop = set;
 	}
-
-
 	T Rop_Get() const
 	{
 		return Rop;
 	}
-
-
 	TOprtn OprtnGet() const
 	{
 		return Operation;
 	}
-
-
 	void OprtnSet(TOprtn set)
 	{
 		Operation = set;
 	}
-
-
 };
 
