@@ -63,11 +63,11 @@ namespace TProcTest
 		TEST_METHOD(OprtnRun)
 		{
 			TProc<int> test = TProc<int>();
-			test.Lop_Res_Set(int(3));
+			test.Lop_Res_Set(int(4));
 			test.Rop_Set(int(4));
 			test.OprtnSet(Mul);
 			test.OprtnRun();
-			Assert::IsTrue(test.Lop_Res_Get() == int(12));
+			Assert::IsTrue(test.Lop_Res_Get() == int(16));
 			Assert::IsTrue(test.Rop_Get() == int(4));
 			Assert::IsTrue(test.OprtnGet() == Mul);
 		}
@@ -87,7 +87,6 @@ namespace TProcTest
 			Assert::AreEqual(test.Lop_Res_Get(), -13);
 			Assert::AreEqual(test.Rop_Get(), 3);
 			Assert::IsTrue(test.OprtnGet() == Mul);
-
 
 			test.ReSet();
 			Assert::IsTrue(test.Lop_Res_Get() == int());
