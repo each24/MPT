@@ -33,6 +33,17 @@ public:
 	}
 	Drobi() : chislitel(0), znamenatel(1) {}
 	Drobi(int value) : chislitel(value), znamenatel(1) {}
+	Drobi(string a) {
+		int pos = a.find("/");
+		if (pos != std::string::npos) {
+			this->chislitel = atol(a.substr(0, pos).c_str());
+			this->znamenatel = atol(a.substr(pos + 1).c_str());
+		}
+		else {
+			this->chislitel = atol(a.c_str());
+			this->znamenatel = 1;
+		}
+	}
 	int getChislitel() const;
 	int getZnamenatel() const;
 	int compareTo(const Drobi &other) const;

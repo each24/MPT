@@ -67,7 +67,7 @@ string Drobi::strZnamenatel() const {
 	return to_string(this->getZnamenatel());
 }
 string Drobi::str() const {
-	return this->strChislitel() + " / " + this->strZnamenatel();
+	return this->strChislitel() + "/" + this->strZnamenatel();
 }
 bool Drobi::more(const Drobi other) const {
 	Drobi a = *this - other;
