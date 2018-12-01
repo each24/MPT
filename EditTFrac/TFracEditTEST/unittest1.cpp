@@ -23,7 +23,7 @@ namespace TFracEditTEST
 			test.setNumber("7");
 			Assert::AreEqual(test.isZero(), false);
 		}
-
+		
 		TEST_METHOD(AddDigit)
 		{
 			TFracEdit test;
@@ -54,7 +54,6 @@ namespace TFracEditTEST
 			test.addZero();
 			Assert::AreEqual(test.getNumber(), (std::string)"50/1");
 			Assert::AreEqual(test.addSplit(), (std::string)"50/"); ;
-			test.addZero();
 			test.addDigit(2);
 			Assert::AreEqual(test.getNumber(), (std::string)"50/2");
 		}
@@ -67,11 +66,23 @@ namespace TFracEditTEST
 			Assert::AreEqual(test.getNumber(), (std::string)"10/1");
 		}
 
-		TEST_METHOD(BackSpace)
+		TEST_METHOD(BackSpaceOne)
 		{
 			TFracEdit test;
 			test.addDigit(5);
 			test.changeSign();
+			Assert::AreEqual(test.backspace(), (std::string)"0");
+		}
+
+		TEST_METHOD(BackSpaceMulti)
+		{
+			TFracEdit test;
+			for (int i = 0; i < 4; ++i)
+				test.addDigit(5);
+			test.changeSign();
+			std::string a = "-555";
+			for(int i = 0; i < 3; ++i, a.pop_back())
+				Assert::AreEqual(test.backspace(), a);
 			Assert::AreEqual(test.backspace(), (std::string)"0");
 		}
 
@@ -84,7 +95,7 @@ namespace TFracEditTEST
 			Assert::AreEqual(test.clear(), (std::string)"0");
 		}
 
-		TEST_METHOD(SetNumber)
+		TEST_METHOD(SetNumber0)
 		{
 			TFracEdit test;
 			std::string number = "3/1";
@@ -92,6 +103,12 @@ namespace TFracEditTEST
 			Assert::AreEqual(test.getNumber(), (std::string)"3/1");
 		}
 
-
+		TEST_METHOD(SetNumber1)
+		{
+			TFracEdit test;
+			std::string number = "-3/1";
+			test.setNumber(number);
+			Assert::AreEqual(test.getNumber(), (std::string)"-3/1");
+		}
 	};
 }

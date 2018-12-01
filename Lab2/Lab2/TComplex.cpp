@@ -61,7 +61,7 @@ string TComplex::strMnim(){
 	return to_string(this->getMnim());
 }
 string TComplex::str() {
-	return this->strReal() + " + i * " + this->strMnim();
+	return this->strReal() + "+i*" + this->strMnim();
 }
 float TComplex::ugolG() {
 	return 180 / M_PI * (*this).ugolR();

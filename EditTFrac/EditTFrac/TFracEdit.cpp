@@ -54,7 +54,7 @@ string TFracEdit::addSplit() {
 
 void TFracEdit::setNumber(string num) {
 	bool flag = true;
-	int znak = 0;
+	int znak = 0; 
 	for (auto &i : num) {
 		if ((i >= 48 && i <= 57) || i == 43 || i == 45 || i == 47) {
 			if (i == 43 || i == 45) {
@@ -74,7 +74,6 @@ void TFracEdit::setNumber(string num) {
 		number = Drobi(num).str();
 	else
 		number = Drobi("0").str();
-
 }
 
 string TFracEdit::getNumber() const {
