@@ -1,34 +1,23 @@
-#pragma once
-#pragma once
-
 #include <string>
+#include <regex>
+using namespace std;
 
 class TComplexEditor {
 public:
 	TComplexEditor();
-
 	bool isZero();
-
-	std::string changeSign();
-
-	std::string addDigit(unsigned int digit);
-
-	std::string addZero();
-
-	std::string backspace();
-
-	std::string clear();
-
-	std::string addSplit();
-
-	void setNumber(std::string &num);
-
-	std::string getNumber() const;
-
-	static const std::string ZERO;
-	static const std::string DIV_SIGN;
+	string changeSign();
+	string addDigit(int digit);
+	string addZero();
+	string backspace();
+	string clear();
+	string addSplit();
+	void setNumber(string &num);
+	string getNumber() const;
+	static const string ZERO;
+	static const string SIGN;
 private:
-	std::string number;
+	string number;
 	bool isRealPartEditing;
 };
 

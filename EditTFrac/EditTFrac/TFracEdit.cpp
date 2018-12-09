@@ -2,9 +2,9 @@
 #include "../../Lab1/Lab1/Drobi.h"
 #include "TFracEdit.h"
 
-
 const string TFracEdit::ZERO = "0/1";
 const string TFracEdit::SIGN = string("/");
+using namespace std;
 
 string TFracEdit::changeSign() {
 	if (number[0] == '-') {
@@ -47,30 +47,24 @@ string TFracEdit::clear() {
 
 string TFracEdit::addSplit() {
 	if (number.find(SIGN) == string::npos) {
-		number = number + SIGN;
+		number = number + SIGN + "1";
 	}
 	return number;
 }
 
 void TFracEdit::setNumber(string num) {
 	bool flag = true;
-	int znak = 0; 
-	for (auto &i : num) {
-		if ((i >= 48 && i <= 57) || i == 43 || i == 45 || i == 47) {
-			if (i == 43 || i == 45) {
-				znak++;
-				if (znak > 2) {
-					flag = false;
-					break;
-				}
-			}
-		}
-		else {
-			flag = false;
-			break;
-		}
+	int znak = 0;
+	string a, b = "1";
+	regex r("-?[1-9]+[[:d:]]*");
+	int f = num.find(SIGN);
+	if (num.find(SIGN) != string::npos) {
+		a = num.substr(0, f);
+		b = num.substr(f + 1, num.length() - f - 1);
+	}else{
+		a = num;
 	}
-	if (flag)
+	if (regex_match(a, r) && regex_match(b, r))
 		number = Drobi(num).str();
 	else
 		number = Drobi("0").str();

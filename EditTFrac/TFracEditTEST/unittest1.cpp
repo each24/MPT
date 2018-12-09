@@ -3,6 +3,7 @@
 #include "../EditTFrac/TFracEdit.h"
 #include "CppUnitTest.h"
 
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TFracEditTEST
@@ -53,9 +54,9 @@ namespace TFracEditTEST
 			test.addDigit(5);
 			test.addZero();
 			Assert::AreEqual(test.getNumber(), (std::string)"50/1");
-			Assert::AreEqual(test.addSplit(), (std::string)"50/"); ;
+			Assert::AreEqual(test.addSplit(), (std::string)"50/1"); ;
 			test.addDigit(2);
-			Assert::AreEqual(test.getNumber(), (std::string)"50/2");
+			Assert::AreEqual(test.getNumber(), (std::string)"50/12");
 		}
 
 		TEST_METHOD(AddZero)
@@ -109,6 +110,13 @@ namespace TFracEditTEST
 			std::string number = "-3/1";
 			test.setNumber(number);
 			Assert::AreEqual(test.getNumber(), (std::string)"-3/1");
+		}
+		TEST_METHOD(RegEXTEST)
+		{
+			regex r("-?[1-9]+[[:d:]]+");
+			Assert::AreEqual(regex_match("-123", r), true);
+			Assert::AreEqual(regex_match("-023", r), false);
+			Assert::AreEqual(regex_match("023", r), false);
 		}
 	};
 }

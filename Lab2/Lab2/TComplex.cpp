@@ -92,6 +92,7 @@ TComplex TComplex::Squer(int n, int k) {
 		throw logic_error("K за пределами допустимого!!!");
 	}
 }
+
 bool TComplex::Equal(TComplex a) {
 	TComplex b = *this;
 	if (a.mnim == b.mnim && b.deist == a.deist)
@@ -99,6 +100,7 @@ bool TComplex::Equal(TComplex a) {
 	else
 		return false;
 }
+
 float TComplex::ugolR() {
 	TComplex a = *this;
 	if (a.deist >= 0)
@@ -115,6 +117,7 @@ float TComplex::ugolR() {
 	else 
 		return float(atan(a.mnim / a.deist) + M_PI);
 }
+
 bool TComplex::more(TComplex other) {
 	TComplex b = *this;
 	TComplex a = b.minus(other);

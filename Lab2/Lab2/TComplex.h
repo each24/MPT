@@ -1,5 +1,6 @@
 #pragma once
 #define _USE_MATH_DEFINES
+#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <cmath>
