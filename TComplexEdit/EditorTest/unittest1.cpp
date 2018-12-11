@@ -38,7 +38,7 @@ namespace EditorTest
 		TEST_METHOD(ChangeSIGN0)
 		{
 			TComplexEditor test;
-			test.setNumber(to_string(0));
+			test.setNumber("0");
 			Assert::AreEqual(test.changeSign(), to_string(0.0) + "+i*" + to_string(0.0));
 			Assert::AreEqual(test.changeSign(), to_string(0.0) + "+i*" + to_string(0.0));
 		}

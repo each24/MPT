@@ -12,7 +12,7 @@ public:
 	string backspace();
 	string clear();
 	string addSplit();
-	void setNumber(string &num);
+	void setNumber(string num);
 	string getNumber() const;
 	static const string ZERO;
 	static const string SIGN;

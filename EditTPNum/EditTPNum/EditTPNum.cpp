@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "EditTPNumber.h"
 #include "../../Lab3/Lab3/TPNumber.h"
 
@@ -36,7 +37,7 @@ string TPNumberEditor::addDigit(int digit) {
 			number = "";
 		}
 		if (digit < 10)
-			number += (char)digit;
+			number += (char)digit + '0';
 		else
 			if(digit <= 15)
 				number += (char)('A' + digit - 10);

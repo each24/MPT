@@ -16,19 +16,13 @@ bool TComplexEditor::isZero() {
 
 
 string TComplexEditor::changeSign() {
-	if (isRealPartEditing) {
-		if (number[0] == '-') {
-			number.erase(number.begin());
-		}
-		else {
-			if (number[0] != '0') {
-				number = "-" + number;
-			}
-		}
+	if (number[0] == '-') {
+		number.erase(number.begin());
 	}
 	else {
-		int pos = number.find("i*");
-		number[pos - 1] = (number[pos - 1] == '-') ? '+' : '-';
+		if (number[0] != '0') {
+			number = "-" + number;
+		}
 	}
 	return number;
 }
@@ -45,13 +39,11 @@ string TComplexEditor::addDigit(int digit) {
 	return number;
 }
 
-
-std::string TComplexEditor::addZero() {
+string TComplexEditor::addZero() {
 	return addDigit(0);
 }
 
-
-std::string TComplexEditor::backspace() {
+string TComplexEditor::backspace() {
 	number.pop_back();
 	if (isRealPartEditing) {
 		if (number == "-" || number.empty()) {
@@ -75,7 +67,7 @@ std::string TComplexEditor::clear() {
 }
 
 std::string TComplexEditor::addSplit() {
-	if (number.find(SIGN) == std::string::npos) {
+	if (number.find(SIGN) == string::npos) {
 		number = number + SIGN;
 		isRealPartEditing = false;
 	}
@@ -83,39 +75,27 @@ std::string TComplexEditor::addSplit() {
 }
 
 
-void TComplexEditor::setNumber(std::string &num) {
-	bool flag = true;
+void TComplexEditor::setNumber(string num) {
 	regex r("-?[1-9]+[[:d:]]*");
+	string a, b = "0";
 	int f = num.find(SIGN);
-	uint32_t minus_c = 0, plus_c = 0;
-	for (auto &i : num) {
-		if ((i >= 48 && i <= 57) || i == 43 || i == 45) {
-			if (i == 43) {
-				minus_c++;
-				if (minus_c > 2) {
-					flag = false;
-					break;
-				}
-			}
-			else {
-				if (i == 45) {
-					plus_c++;
-					if (plus_c > 2) {
-						flag = false;
-						break;
-					}
-				}
-			}
-		}
-		else {
-			flag = false;
-			break;
-		}
+	if (num.find(SIGN) != string::npos) {
+		a = num.substr(0, f);
+		b = num.substr(f + 1, num.length() - f - 1);
+		if (regex_match(a, r) && regex_match(b, r))
+			number = TComplex(num).str();
+		else
+			number = TComplex("0").str();
 	}
-	if (flag)
-		number = TComplex(num).str();
-	else
-		number = TComplex("0").str();
+	else {
+		a = num;
+		if (regex_match(a, r))
+			number = TComplex(num).str();
+		else
+			number = TComplex("0").str();
+	}
+	
+	
 }
 
 
