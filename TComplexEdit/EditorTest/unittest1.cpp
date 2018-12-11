@@ -35,6 +35,7 @@ namespace EditorTest
 			Assert::AreEqual(test.changeSign(), to_string(-1.0) + "+i*" + to_string(0.0));
 			Assert::AreEqual(test.changeSign(), to_string(1.0) + "+i*" + to_string(0.0));
 		}
+		
 		TEST_METHOD(ChangeSIGN0)
 		{
 			TComplexEditor test;
@@ -71,7 +72,7 @@ namespace EditorTest
 		TEST_METHOD(GetNumber)
 		{
 			TComplexEditor test;
-			std::string number = "2";
+			string number = "2";
 			test.setNumber(number);
 			Assert::AreEqual(test.getNumber(), to_string(2.0) + "+i*" + to_string(0.0));
 		}
