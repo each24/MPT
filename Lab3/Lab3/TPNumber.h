@@ -24,7 +24,12 @@ public:
 			throw exception("error");
 	}
 	TPNumber(double a, int b) :a(a), b(b), c(0) {
-		;
+		if (b < 2 || b > 16)
+			throw exception("error");
+	}
+	TPNumber(string A, string B) : a(atof(A.c_str())), b(int(atof(B.c_str()))), c(int(atof(0))) {
+		if (b < 2 || b > 16)
+			throw exception("error");
 	}
 	double getA();
 	int getB();
