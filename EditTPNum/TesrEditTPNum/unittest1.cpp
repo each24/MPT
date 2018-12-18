@@ -13,7 +13,7 @@ namespace TesrEditTPNum
 		TEST_METHOD(Constructor)
 		{
 			TPNumberEditor test;
-			Assert::AreEqual(test.getNumber(), (std::string)"0");
+			Assert::AreEqual(test.getNumber(), (string)"0");
 		}
 
 		TEST_METHOD(TestIsZero)
@@ -36,11 +36,11 @@ namespace TesrEditTPNum
 			TPNumberEditor test;
 			test.addDigit(5);
 			test.addZero();
-			Assert::AreEqual(test.getNumber(), (std::string)"50");
+			Assert::AreEqual(test.getNumber(), (string)"50");
 			test.addSplit();
 			test.addZero();
 			test.addDigit(1);
-			Assert::AreEqual(test.getNumber(), (std::string)"51");
+			Assert::AreEqual(test.getNumber(), (string)"50.");
 		}
 		TEST_METHOD(BackSpace)
 		{
@@ -60,7 +60,7 @@ namespace TesrEditTPNum
 		TEST_METHOD(WriteString)
 		{
 			TPNumberEditor test;
-			std::string number = "42";
+			string number = "42";
 			test.setNumber(number);
 			Assert::AreEqual(test.getNumber(), number);
 		}

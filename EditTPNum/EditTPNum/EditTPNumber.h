@@ -10,7 +10,7 @@ public:
 	bool isZero();
 	string clear();
 	string addSplit();
-	void setNumber(string &num);
+	void setNumber(string num);
 	string getNumber() const;
 	string changeSign();
 	string addDigit(int digit);

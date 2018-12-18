@@ -75,9 +75,14 @@ std::string TPNumberEditor::addSplit() {
 }
 
 
-void TPNumberEditor::setNumber(string &num) {
+void TPNumberEditor::setNumber(string num) {
 	bool flag = true;
 	string a, b = "1";
+	if (base > 10)
+		string B = to_string(base - 11 + 'A');
+	else
+		string B = to_string(base - 1);
+	string reg = "-?[1-" + B + "]+[0-" + B "]*";
 	regex ra("-?[1-9]+[[:d:]]*"), rb("[1-9]+[[:d:]]*");
 	int f = num.find(SIGN);
 	if (num.find(SIGN) != string::npos) {
@@ -94,5 +99,8 @@ void TPNumberEditor::setNumber(string &num) {
 
 
 std::string TPNumberEditor::getNumber() const {
-	return TPNumber(number, to_string(base)).strN();
+	if (number != ZERO)
+		return TPNumber(number, to_string(base)).strN();
+	else
+		return ZERO;
 }
