@@ -23,13 +23,18 @@ namespace TesrEditTPNum
 			test.addDigit(5);
 			Assert::AreEqual(test.isZero(), false);
 		}
-
-		TEST_METHOD(AddSignAndAddDigit)
+		TEST_METHOD(ChangeSIGN)
 		{
 			TPNumberEditor test;
 			test.addDigit(5);
 			Assert::AreEqual(test.changeSign(), (string)"-5");
 			Assert::AreEqual(test.changeSign(), (string)"5");
+		}
+		TEST_METHOD(AddDigit)
+		{
+			TPNumberEditor test;
+			test.addDigit(5);
+			Assert::AreEqual(test.getNumber(), (string)"5");
 		}
 		TEST_METHOD(AddZeroAndAddSplit)
 		{
@@ -40,7 +45,7 @@ namespace TesrEditTPNum
 			test.addSplit();
 			test.addZero();
 			test.addDigit(1);
-			Assert::AreEqual(test.getNumber(), (string)"50.");
+			Assert::AreEqual(test.getNumber(), (string)"50.0");
 		}
 		TEST_METHOD(BackSpace)
 		{

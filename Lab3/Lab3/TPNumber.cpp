@@ -89,10 +89,10 @@ string TPNumber::strN(){
 			else
 				NUM += to_string(out[i]);
 		}
-		NUM += "";
+		/*NUM += ".";
 		for (int i = 0; i < c; ++i) {
 			NUM += "0";
-		}
+		}*/
 	}
 	else {
 		int t = int(A);

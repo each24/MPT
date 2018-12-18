@@ -23,11 +23,11 @@ public:
 		if (c < 0 || b < 2 || b > 16)
 			throw exception("error");
 	}
-	TPNumber(double a, int b) :a(a), b(b), c(0) {
+	TPNumber(double a, int b) :a(a), b(b), c(1) {
 		if (b < 2 || b > 16)
 			throw exception("error");
 	}
-	TPNumber(string A, string B) : a(atof(A.c_str())), b(int(atof(B.c_str()))), c(0) {
+	TPNumber(string A, string B) : a(atof(A.c_str())), b(int(atof(B.c_str()))), c(1) {
 		if (b < 2 || b > 16)
 			throw exception("error");
 	}
