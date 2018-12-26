@@ -1,37 +1,20 @@
 #include "stdafx.h"
 #include <string>
 #include <list>
-//#include "../TMember/TMember.h"
+#include "../TMember/TMember.h"
 
 using namespace std;
 
 class TPoly
 {
 	public:
-		class TMember
-		{
-		private:
-			int k;
-			int n;
-		public:
-			explicit TMember(int k, int n) : k(k), n(n) {}
-			//TMember &operator=(TMember &other) = default;
-			int getN();
-			int getK();
-			void setN(int n);
-			void setK(int k);
-			//bool operator==(TMember &other);
-			TMember differentiate();
-			double calculate(double a);
-		};
-
 		explicit TPoly(int k = 0, int n = 0);
 		int getN();
 		int getK(int N);
 		void clear();
 		TPoly differentiate();
 		double calculate(double a);
-		TMember &elemAt(int idx);
+		//TMember &elemAt(int idx);
 		//TPoly &operator=(TPoly &other) = default;
 		TPoly operator+(TMember &elem)
 		{
@@ -69,7 +52,6 @@ class TPoly
 			a.polynom.push_back(elem);
 			return a;
 		}
-
 		TPoly operator+(TPoly &sec)
 		{
 			TPoly a = *this;
@@ -106,13 +88,11 @@ class TPoly
 			}
 			return a;
 		}
-
 		TPoly operator-(TMember &elem)
 		{
 			TMember b(-elem.getK(), elem.getN());
 			return *this + b;
 		}
-
 		TPoly  operator-(TPoly &sec)
 		{
 			TPoly a = *this;
@@ -160,7 +140,7 @@ class TPoly
 			return zero - *this;
 		}
 
-		/*bool operator==(TPoly &sec)
+		bool operator==(TPoly &sec)
 		{
 			auto size = polynom.size();
 			if (size != sec.polynom.size())
@@ -181,12 +161,12 @@ class TPoly
 
 			return true;
 		}
-		*/
+		/*
 		void Method1() {
 			TPoly p1;
 			TPoly p2;
 			TPoly p3 = p1 + p2;
-		}
+		}*/
 	private:
 		list<TMember> polynom;
 };
