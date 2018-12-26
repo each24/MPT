@@ -44,27 +44,53 @@ public:
 			this->znamenatel = 1;
 		}
 	}
-	int getChislitel() const;
-	int getZnamenatel() const;
-	int compareTo(const Drobi &other) const;
-	Drobi Add(Drobi other) const;
+	int getChislitel();
+	int getZnamenatel();
+	int compareTo(Drobi &other);
+	Drobi Add(Drobi other);
 	Drobi copy();
-	Drobi minus(const Drobi other);
-	Drobi obratnoe() const;
-	Drobi cut(const Drobi other);
-	Drobi squer() const;
-	Drobi multiplie(const Drobi other) const;
-	string strChislitel() const;
-	string strZnamenatel() const;
-	string str() const;
-	bool more(const Drobi other)const;
+	Drobi minus(Drobi other);
+	Drobi obratnoe();
+	Drobi cut(Drobi other);
+	Drobi squer();
+	Drobi multiplie(Drobi other);
+	string strChislitel();
+	string strZnamenatel();
+	string str();
+	bool more(Drobi other);
+	Drobi operator+(Drobi &b) {
+		Drobi a = *this;
+		int corpChislitel = a.getChislitel() * b.getZnamenatel() + b.getChislitel() * a.getZnamenatel();
+		int corpZnamenatel = a.getZnamenatel() * b.getZnamenatel();
+		return Drobi(corpChislitel, corpZnamenatel);
+	}
+	Drobi operator-() {
+		Drobi a = *this;
+		return Drobi(-a.getChislitel(), a.getZnamenatel());
+	}
+	Drobi operator-(Drobi &b) {
+		Drobi a = *this;
+		b = -b;
+		return a + b;
+	}
+	Drobi operator*(Drobi &b) {
+		Drobi a = *this;
+		return Drobi(a.getChislitel() * b.getChislitel(), a.getZnamenatel() * b.getZnamenatel());
+	}
+	Drobi operator/(Drobi &b) {
+		Drobi a = *this;
+		return Drobi(a.getChislitel() * b.getZnamenatel(), a.getZnamenatel() * b.getChislitel());
+	}
+	//bool operator < (const Drobi &b);
 };
 
-Drobi operator+(const Drobi &a, const Drobi &b);
-Drobi operator-(const Drobi &a);
-Drobi operator-(const Drobi &a, const Drobi &b);
-Drobi operator*(const Drobi &a, const Drobi &b);
-Drobi operator/(const Drobi &a, const Drobi &b);
-
-
+bool operator < (const Drobi &a, const Drobi &b);
+bool operator == (const Drobi &a, const Drobi &b);
+/*
+Drobi operator+(Drobi &a);
+Drobi operator-(void);
+Drobi operator-(Drobi &a);
+Drobi operator*(Drobi &a);
+Drobi operator/(Drobi &a);
+*/
 

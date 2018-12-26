@@ -1,13 +1,30 @@
 #include "stdafx.h"
 #include <string>
 #include <list>
-#include "../TMember/TMember.h"
+//#include "../TMember/TMember.h"
 
 using namespace std;
 
 class TPoly
 {
 	public:
+		class TMember
+		{
+		private:
+			int k;
+			int n;
+		public:
+			explicit TMember(int k, int n) : k(k), n(n) {}
+			//TMember &operator=(TMember &other) = default;
+			int getN();
+			int getK();
+			void setN(int n);
+			void setK(int k);
+			//bool operator==(TMember &other);
+			TMember differentiate();
+			double calculate(double a);
+		};
+
 		explicit TPoly(int k = 0, int n = 0);
 		int getN();
 		int getK(int N);
@@ -15,58 +32,54 @@ class TPoly
 		TPoly differentiate();
 		double calculate(double a);
 		TMember &elemAt(int idx);
-		TPoly &operator=(TPoly &other) = default;
+		//TPoly &operator=(TPoly &other) = default;
 		TPoly operator+(TMember &elem)
 		{
-			TPoly res = *this;
-			res = res + res;
-			res.polynom.remove(TMember(0, 0));
-
-			for (auto it = res.polynom.begin(); it != res.polynom.end(); ++it)
+			TPoly a = *this;
+			//a = a + a;
+			//a.polynom.remove(TMember(0, 0));
+			
+			for (auto i = a.polynom.begin(); i != a.polynom.end(); ++i)
 			{
-				int memExp = it->getN();
-				int elemExp = elem.getN();
-				if (memExp == elemExp)
+				if (i->getN() == elem.getN())
 				{
-					int buf = it->getK() + elem.getK();
-					if (buf != 0)
+					if (i->getK() + elem.getK())
 					{
-						it->setK(buf);
+						i->setK(i->getK() + elem.getK());
 					}
 					else
 					{
-						res.polynom.remove(*it);
+						//a.polynom.remove(*i);
 					}
-					if (res.polynom.empty())
+					if (a.polynom.empty())
 					{
-						res.polynom.emplace_back(0, 0);
+						a.polynom.emplace_back(0, 0);
 					}
-					return res;
+					return a;
 				}
 				else
 				{
-					if (elemExp > memExp)
+					if (i->getN() < elem.getN())
 					{
-						TMember buf = elem;
-						res.polynom.insert(it, buf);
-						return res;
+						a.polynom.insert(i,elem);
+						return a;
 					}
 				}
 			}
-			res.polynom.push_back(elem);
-			return res;
+			a.polynom.push_back(elem);
+			return a;
 		}
 
-		TPoly  operator+(TPoly &sec)
+		TPoly operator+(TPoly &sec)
 		{
-			TPoly res = *this;
-			auto itFst = res.polynom.begin();
+			TPoly a = *this;
+			auto itFst = a.polynom.begin();
 			auto itSnd = sec.polynom.begin();
-			for (; itFst != res.polynom.end(); ++itFst)
+			for (; itFst != a.polynom.end(); ++itFst)
 			{
 				while (itSnd->getN() > itFst->getN() && itSnd != sec.polynom.end())
 				{
-					res.polynom.insert(itFst, *itSnd);
+					a.polynom.insert(itFst, *itSnd);
 					++itSnd;
 				}
 				if (itSnd->getN() == itFst->getN())
@@ -78,64 +91,67 @@ class TPoly
 					}
 					else
 					{
-						res.polynom.remove(*itFst);
+						//a.polynom.remove(*itFst);
 					}
 					++itSnd;
 				}
 			}
 			if (itSnd != sec.polynom.end())
 			{
-				res.polynom.insert(itFst, itSnd, sec.polynom.end());
+				a.polynom.insert(itFst, itSnd, sec.polynom.end());
 			}
-			if (res.polynom.empty())
+			if (a.polynom.empty())
 			{
 				polynom.emplace_back(0, 0);
 			}
-			return res;
+			return a;
 		}
 
-		TPoly  operator-(TMember &elem)
+		TPoly operator-(TMember &elem)
 		{
-			return *this + TMember(-elem.getK(), elem.getN());
+			TMember b(-elem.getK(), elem.getN());
+			return *this + b;
 		}
 
 		TPoly  operator-(TPoly &sec)
 		{
-			TPoly res = *this;
+			TPoly a = *this;
 
 			for (auto mem : sec.polynom)
 			{
-				res = res - mem;
+				a = a - mem;
 			}
 
-			return res;
+			return a;
 		}
 
 		TPoly  operator*(TMember &elem)
 		{
-			TPoly res;
-
-			for (auto mem : polynom)
+			TPoly a;
+			
+			for (auto &mem : polynom)
 			{
-				res = res + TMember(mem.getK() * elem.getK(), mem.getN() + elem.getN());
+				TMember b(mem.getK() * elem.getK(), mem.getN() + elem.getN());
+				a = a + b;
 			}
 
-			return res;
+			return a;
 		}
 
 		TPoly operator*(TPoly &sec)
 		{
-			TPoly res;
+			TPoly a;
 
 			for (auto mem : polynom)
 			{
 				for (auto secMem : sec.polynom)
 				{
-					res = res + TMember(mem.getK() * secMem.getK(), mem.getN() + secMem.getN());
+					TMember b(mem.getK() * secMem.getK(), mem.getN() + secMem.getN());
+					a = a + b;
 				}
 			}
 
-			return res;
+			return a;
 		}
 
 		TPoly operator-()
@@ -144,7 +160,7 @@ class TPoly
 			return zero - *this;
 		}
 
-		bool operator==(TPoly &sec)
+		/*bool operator==(TPoly &sec)
 		{
 			auto size = polynom.size();
 			if (size != sec.polynom.size())
@@ -153,9 +169,11 @@ class TPoly
 			}
 
 			auto secMem = sec.polynom.begin();
-			for (auto mem : polynom)
+			for (auto &mem : polynom)
 			{
-				if (!(mem == *secMem))
+				TMember m2 = (TMember)(*secMem);
+				TMember m1 = ((TMember)mem);
+				if (!((m1.getK() == m2.getK() && m1.getN() == m2.getN())))
 				{
 					return false;
 				}
@@ -163,8 +181,12 @@ class TPoly
 
 			return true;
 		}
-
-
+		*/
+		void Method1() {
+			TPoly p1;
+			TPoly p2;
+			TPoly p3 = p1 + p2;
+		}
 	private:
 		list<TMember> polynom;
 };

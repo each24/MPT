@@ -39,7 +39,8 @@ TPoly TPoly::differentiate()
 	{
 		if (mem.getN())
 		{
-			res = res + mem.differentiate();
+			TMember b = mem.differentiate();
+			res = res + b;
 		}
 	}
 
